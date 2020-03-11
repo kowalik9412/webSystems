@@ -1,5 +1,5 @@
-exports.getIndexPage = (req, res, next) => {
-    res.render('index', {
-        title: 'Sign In or Sign Up'
-    });
+exports.getDashboardPage = (req, res, next) => {
+  res.render('user/dashboard', {
+    title: 'Dashboard'
+  });
 };
