@@ -1,5 +1,7 @@
-body {
-  height: 100vh;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -13,67 +15,30 @@ h2 {
   color: #cccccc;
 }
 
-h1 {
-  font-size: 24px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #cccccc;
-  margin-top: 80px;
-}
-
 a {
   color: #cccccc;
   display: inline-block;
   text-decoration: none;
   font-weight: 400;
 }
-
-.git-logo {
-  margin-bottom: 80px;
-  font-size: 40px;
+a::hover {
+  color: #cccccc;
 }
 
-.git-logo:hover {
-  color: #b8142a;
-}
-
-.git-logo:focus {
-  color: #b8142a;
-}
-
-.col2,
-.col1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
-}
-
-.col1 {
-  background: url('https://burst.shopifycdn.com/photos/a-sliver-of-film-reel-curls-around-a-camera-sprocket.jpg?width=4460&height=4460&exif=1&iptc=1');
-  background-repeat: no-repeat;
+.main-form {
+  background-image: url('../img/background.jpg');
+  height: 100vh;
   background-size: cover;
-  justify-content: space-between;
-}
-
-.col2 {
-  background-color: #1c1c1d;
-}
-
-.wrapper {
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
+  align-items: center;
+  padding: 2rem;
 }
 
-#formContent {
+.formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #1c1c1d;
@@ -87,7 +52,7 @@ a {
   text-align: center;
 }
 
-#formFooter {
+.formFooter {
   padding: 0 0 30px 0;
   text-align: center;
 }
@@ -165,25 +130,22 @@ input[type='password']:placeholder {
   color: #cccccc;
 }
 
-.underlineHover:after {
-  display: block;
-  left: 0;
-  bottom: -10px;
-  width: 0;
-  height: 2px;
-  background-color: #b8142a;
-  content: '';
-  transition: width 0.2s;
-}
-
-.underlineHover:hover {
-  color: #fff;
-}
-
-.underlineHover:hover:after {
-  width: 100%;
-}
-
 *:focus {
   outline: none;
+}
+
+.fa-github {
+  font-size: 40px;
+}
+
+.fa-github:hover {
+  color: #b8142a;
+}
+
+.fa-github:focus {
+  color: #b8142a;
+}
+
+.main-footer p {
+  color: #cccccc;
 }
