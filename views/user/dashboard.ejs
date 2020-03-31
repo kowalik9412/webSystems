@@ -4,6 +4,33 @@
 </head>
 
 <body>
+    <div class="container">
+        <nav class="main-nav">
+            <div class="brand">
+                <i class="fas fa-ticket-alt"></i>
+                <p>Logo</p>
+            </div>
+        <ul class="main-menu">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#">Github</a>
+            </li>
+        </ul>
+        <ul class="add-menu">
+            <li>
+                <a href="#">Logout</a>
+            </li>
+        </ul>
+        </nav>
 
+        <header class="headerSearch">
+            <form action="/user/search" method="POST">
+                <input type="text" id="searchInput" name="searchInput" placeholder="Harry Potter" ">
+                <input type="submit" class="btn" value="Search">
+            </form>
+        </header>
+    </div>
 
 <%- include('../includes/footer.ejs') %>
