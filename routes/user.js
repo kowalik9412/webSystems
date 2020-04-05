@@ -18,4 +18,11 @@ router.post(
   userController.postSearch
 );
 
+// POST Search/:token
+router.get(
+  '/search/:imdbID',
+  isUserAuthenticated,
+  userController.getSearchDetails
+);
+
 module.exports = router;

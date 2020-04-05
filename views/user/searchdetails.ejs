@@ -1,0 +1,65 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/styles/dashboard.css" />
+<link rel="stylesheet" href="/styles/details.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="main-nav">
+            <div class="brand">
+                <i class="fas fa-ticket-alt"></i>
+                <p>Logo</p>
+            </div>
+        <ul class="main-menu">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="https://github.com/kowalik9412/webSystems">Github</a>
+            </li>
+        </ul>
+        <ul class="add-menu">
+            <li>
+                <a href="/authentication/logout">Logout</a>
+            </li>
+        </ul>
+        </nav>
+
+        <header class="headerSearch">
+            <div class="row no-gutters">
+                <div class="col-lg-4 col-md-4 col-sm-12 content">
+                    <img class="background" src="<%= details.posterUrl %>" alt="<%= details.Title %>">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 content">
+                    <section class="head">
+                        <h2><%= details.title %></h2>
+                        <p></p>
+                        <p><% if(details.seasons === undefined){%>
+                            <p><span class="font-weight-lighter"><%= details.genre %> / <%= details.lang %> / <%= details.country %> / <%= details.year %> / <%= details.runtime %> / <%= details.type %></span></p>
+                            <%} else { %>
+                                <p><span class="font-weight-lighter"><%= details.genre %> / <%= details.lang %> / <%= details.country %> / <%= details.year %> / <%= details.runtime %> / <%= details.type %> / <%= details.seasons %> seasons</span></p>
+                            <% }%>
+                        </p>
+                        <p><i class="fas fa-star"></i><span class="font-weight-lighter"><%= details.rating %> / <%= details.votes %></span></p>
+                        <p><span class="font-weight-bold">Director(s)</span><span class="font-weight-lighter"> <%= details.director %></span></p>
+                        <p><span class="font-weight-bold">Writer(s)</span><span class="font-weight-lighter"> <%= details.writer %></span></p>
+                    </section>
+                    <section class="body">
+                        <h4>Actors</h4>
+                        <p class="font-weight-lighter"><%= details.actors %></p>
+                    </section>
+                    <section class="footer">
+                        <h4>Plot</h4>
+                        <p class="font-weight-lighter"><%= details.plot %></p>
+                        <p><span class="font-weight-bold">Awards: </span><span class="font-weight-lighter"> <%= details.awards %></span></p>
+                        <form action="/user/save/<%= details.imdbID %>" method="post">
+                            <button class="btn btn-lg btn-outline-success" type="submit">Save</button>
+                            <a href="/" class="btn btn-lg btn-outline-danger">Back</a>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </header>
+    </div>
+
+<%- include('../includes/footer.ejs') %>

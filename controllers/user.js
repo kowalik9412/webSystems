@@ -38,3 +38,69 @@ exports.postSearch = (req, res, next) => {
       console.log(error);
     });
 };
+
+exports.getSearchDetails = (req, res, next) => {
+  const imdbID = req.params.imdbID;
+  console.log(imdbID);
+
+  axios({
+    method: 'GET',
+    url: 'http://www.omdbapi.com/?apikey=7d77863c&',
+    params: {
+      i: imdbID,
+      plot: 'full'
+    }
+  })
+    .then(response => {
+      const resp = response.data;
+      const {
+        Title,
+        Year,
+        Released,
+        Genre,
+        Runtime,
+        Director,
+        Writer,
+        Actors,
+        Plot,
+        Language,
+        Country,
+        Awards,
+        Poster,
+        imdbRating,
+        imdbVotes,
+        imdbID,
+        Type,
+        totalSeasons
+      } = resp;
+      const data = {
+        title: Title,
+        year: Year,
+        released: Released,
+        runtime: Runtime,
+        genre: Genre,
+        director: Director,
+        writer: Writer,
+        actors: Actors,
+        plot: Plot,
+        lang: Language,
+        country: Country,
+        awards: Awards,
+        posterUrl: Poster,
+        rating: imdbRating,
+        votes: imdbVotes,
+        imdbID: imdbID,
+        type: Type,
+        seasons: totalSeasons
+      };
+      console.log(data.seasons);
+
+      res.render('user/searchdetails', {
+        title: data.title,
+        details: data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
