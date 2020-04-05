@@ -10,6 +10,9 @@ router.get('/', authenticationController.getIndexPage);
 // GET Login Page
 router.get('/login', authenticationController.getIndexPage);
 
+// GET Logout
+router.get('/logout', authenticationController.getLogout);
+
 // POST Login
 router.post(
   '/login',

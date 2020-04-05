@@ -9,6 +9,11 @@ exports.getIndexPage = (req, res, next) => {
   });
 };
 
+exports.getLogout = (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+};
+
 exports.postLogin = (req, res, next) => {
   const errors = validationResult(req);
 

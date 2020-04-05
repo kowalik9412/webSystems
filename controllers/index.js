@@ -1,5 +1,9 @@
 exports.getIndexPage = (req, res, next) => {
-  res.render('index', {
-    title: 'Sign In'
-  });
+  if (!req.user) {
+    res.render('index', {
+      title: 'Sign In'
+    });
+  } else {
+    res.redirect('user/dashboard');
+  }
 };
