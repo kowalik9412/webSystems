@@ -18,11 +18,24 @@ router.post(
   userController.postSearch
 );
 
-// POST Search/:token
+// GET Search/:token
 router.get(
   '/search/:imdbID',
   isUserAuthenticated,
   userController.getSearchDetails
 );
+
+// POST Save/:token
+router.post(
+  '/save/:imdbID',
+  isUserAuthenticated,
+  userController.postSaveToProfile
+);
+
+// Get Profile Page
+router.get('/profile', isUserAuthenticated, userController.getProfilePage);
+
+// Get Delete Saved/:id
+router.get('/delete/:id', isUserAuthenticated, userController.getDeleteSaved);
 
 module.exports = router;
