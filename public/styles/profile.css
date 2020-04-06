@@ -18,6 +18,13 @@ h2 {
   background-color: #1c1c1d;
 }
 
+.profile-header h2,
+.profile-body h2,
+.profile-footer h2 {
+  text-align: center;
+  margin: 40px 0;
+}
+
 .user-area {
   display: flex;
   flex-direction: column;

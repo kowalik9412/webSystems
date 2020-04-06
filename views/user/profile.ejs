@@ -28,11 +28,8 @@
         </ul>
         </nav>
         <section class="user-area">
-            <header class="profile-header">
-                <h1>profile section</h1>
-            </header>
             <section class="profile-body">
-                <h1>profile body</h1>
+                <h2>Things you saved..</h2>
                 <% if (typeof response != 'undefined' && response.length > 0) { %>
                 <div class="row">
                     <% for (let responses of response){ %>
@@ -60,7 +57,31 @@
                 <% } %>
             </section>
             <section class="profile-footer">
-                <h1>profile footer</h1>
+                <h2>Things others saved..</h2>
+                <% if (typeof otherUser != 'undefined' && otherUser.length > 0) { %>
+                <div class="row">
+                    <% for (let otherUsers of otherUser){ %>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card">
+                            <img class="card-img-top" src="<%= otherUsers.posterUrl %>" alt="<%= otherUsers.title %>">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= otherUsers.title %></h5>
+                            </div>
+                            <div class="card-body">
+                                <a href="/user/search/<%= otherUsers.imdbID %>" class="card-link">Get more information<i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <% } if(typeof otherUser == 'undefined') { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>No data!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <% } %>
             </section>
         </section>
     </div>

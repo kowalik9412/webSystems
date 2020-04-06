@@ -204,6 +204,21 @@ exports.postSaveToProfile = (req, res, next) => {
 
 exports.getProfilePage = (req, res, next) => {
   const userId = req.user._id;
+  let resp = [];
+  let other = [];
+  let ola = [];
+
+  User.find({ _id: { $ne: userId } })
+    .then(users => {
+      users.forEach(entry => {
+        return other.push(entry.saved);
+      });
+      ola = [].concat.apply([], other);
+    })
+    .catch(errors => {
+      console.log(errors);
+      next();
+    });
 
   User.findById({ _id: userId })
     .then(user => {
@@ -214,7 +229,8 @@ exports.getProfilePage = (req, res, next) => {
         res.render('user/profile', {
           title: 'User',
           response: resp,
-          userEmail: req.user.email
+          userEmail: req.user.email,
+          otherUser: ola
         });
       }
     })
