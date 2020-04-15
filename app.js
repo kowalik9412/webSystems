@@ -10,7 +10,7 @@ const passportLocal = require('passport-local');
 require('./utils/passport')(passport);
 require('dotenv').config();
 
-// Import routes
+// Import route
 const authenticationRoutes = require('./routes/authentication');
 const userRoutes = require('./routes/user');
 const indexRoutes = require('./routes/index');
