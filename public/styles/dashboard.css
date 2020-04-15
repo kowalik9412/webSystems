@@ -163,6 +163,7 @@ input[type='text']:placeholder {
 
 .examples {
   margin: 70px 0;
+  background-color: #1c1c1d;
 }
 
 .card {
