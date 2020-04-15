@@ -25,6 +25,7 @@ exports.postLogin = (req, res, next) => {
     return res.render('index', {
       title: 'Sign In - Error',
       errors: errors.array(),
+      specError: [],
     });
   } else {
     passport.authenticate('local', {
@@ -59,6 +60,7 @@ exports.postRegister = (req, res, next) => {
     return res.render('register', {
       title: 'Sign Up - Error',
       errors: errors.array(),
+      specError: [],
     });
   }
 
