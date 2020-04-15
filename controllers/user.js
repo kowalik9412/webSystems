@@ -6,7 +6,7 @@ exports.getDashboardPage = (req, res, next) => {
   res.render('user/dashboard', {
     title: 'Dashboard',
     response: [],
-    userEmail: req.user.email
+    userEmail: req.user.email,
   });
 };
 
@@ -19,7 +19,7 @@ exports.postSearch = (req, res, next) => {
       title: 'Dashboard - Error',
       response: [],
       errors: errors.array(),
-      userEmail: req.user.email
+      userEmail: req.user.email,
     });
   }
 
@@ -27,18 +27,18 @@ exports.postSearch = (req, res, next) => {
     method: 'GET',
     url: 'http://www.omdbapi.com/?apikey=7d77863c&',
     params: {
-      s: `${name}`
-    }
+      s: `${name}`,
+    },
   })
-    .then(response => {
+    .then((response) => {
       const resp = response.data.Search;
       res.render('user/dashboard', {
         title: 'Dashboard',
         response: resp,
-        userEmail: req.user.email
+        userEmail: req.user.email,
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 };
@@ -51,10 +51,10 @@ exports.getSearchDetails = (req, res, next) => {
     url: 'http://www.omdbapi.com/?apikey=7d77863c&',
     params: {
       i: imdbID,
-      plot: 'full'
-    }
+      plot: 'full',
+    },
   })
-    .then(response => {
+    .then((response) => {
       const resp = response.data;
       const {
         Title,
@@ -74,7 +74,7 @@ exports.getSearchDetails = (req, res, next) => {
         imdbVotes,
         imdbID,
         Type,
-        totalSeasons
+        totalSeasons,
       } = resp;
       const data = {
         title: Title,
@@ -94,16 +94,16 @@ exports.getSearchDetails = (req, res, next) => {
         votes: imdbVotes,
         imdbID: imdbID,
         type: Type,
-        seasons: totalSeasons
+        seasons: totalSeasons,
       };
 
       res.render('user/searchdetails', {
         title: data.title,
         details: data,
-        userEmail: req.user.email
+        userEmail: req.user.email,
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       res.redirect('/');
     });
@@ -119,10 +119,10 @@ exports.postSaveToProfile = (req, res, next) => {
     url: 'http://www.omdbapi.com/?apikey=7d77863c&',
     params: {
       i: imdbID,
-      plot: 'full'
-    }
+      plot: 'full',
+    },
   })
-    .then(response => {
+    .then((response) => {
       const resp = response.data;
       const {
         Title,
@@ -142,7 +142,7 @@ exports.postSaveToProfile = (req, res, next) => {
         imdbVotes,
         imdbID,
         Type,
-        totalSeasons
+        totalSeasons,
       } = resp;
       data = {
         title: Title,
@@ -162,12 +162,12 @@ exports.postSaveToProfile = (req, res, next) => {
         votes: imdbVotes,
         imdbID: imdbID,
         type: Type,
-        seasons: totalSeasons
+        seasons: totalSeasons,
       };
     })
-    .then(result => {
+    .then((result) => {
       User.findById({ _id: userId })
-        .then(user => {
+        .then((user) => {
           // If profile does not exist redirect to /
           if (!user) {
             res.redirect('/');
@@ -176,7 +176,7 @@ exports.postSaveToProfile = (req, res, next) => {
           else {
             const userData = user.saved;
             let idArray = [];
-            userData.forEach(entry => {
+            userData.forEach((entry) => {
               idArray.push(entry.imdbID);
             });
             // If idArray DOES NOT HAVE imdbID, then push
@@ -191,12 +191,12 @@ exports.postSaveToProfile = (req, res, next) => {
             }
           }
         })
-        .catch(error => {
+        .catch((error) => {
           res.redirect('/');
           console.log(error);
         });
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       res.redirect('/');
     });
@@ -207,21 +207,34 @@ exports.getProfilePage = (req, res, next) => {
   let resp = [];
   let other = [];
   let ola = [];
+  let bef = [];
 
   User.find({ _id: { $ne: userId } })
-    .then(users => {
-      users.forEach(entry => {
+    .then((users) => {
+      users.forEach((entry) => {
         return other.push(entry.saved);
       });
       ola = [].concat.apply([], other);
     })
-    .catch(errors => {
+    .catch((errors) => {
+      console.log(errors);
+      next();
+    });
+
+  User.find({ _id: { $ne: userId } })
+    .then((users) => {
+      users.forEach((entry) => {
+        return bef.push(entry.email);
+      });
+      users = [].concat.apply([], bef);
+    })
+    .catch((errors) => {
       console.log(errors);
       next();
     });
 
   User.findById({ _id: userId })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         res.redirect('/');
       } else {
@@ -230,11 +243,12 @@ exports.getProfilePage = (req, res, next) => {
           title: 'User',
           response: resp,
           userEmail: req.user.email,
-          otherUser: ola
+          otherUser: ola,
+          otherProfile: bef,
         });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       res.redirect('/');
       console.log(error);
     });
@@ -246,13 +260,13 @@ exports.getDeleteSaved = (req, res, next) => {
   const userId = req.user._id;
 
   User.findById({ _id: userId })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         res.redirect('/');
       } else {
         data = user.saved;
-        user.saved = data.filter(entry => entry.imdbID !== imdbIDtoRemoved);
-        user.saved.forEach(entry => {
+        user.saved = data.filter((entry) => entry.imdbID !== imdbIDtoRemoved);
+        user.saved.forEach((entry) => {
           if (entry == {}) {
             entry.delete(entry);
           }
@@ -261,8 +275,30 @@ exports.getDeleteSaved = (req, res, next) => {
         res.redirect('/user/profile');
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       res.redirect('/user/profile');
+    });
+};
+
+exports.getSpecificProfilePage = (req, res, next) => {
+  const email = req.params.email;
+  let resp = [];
+
+  User.findOne({ email: email })
+    .then((user) => {
+      if (!user) {
+        res.redirect('/user/profile');
+      }
+      resp = user.saved;
+      res.render('user/specprofile', {
+        title: `${user.email} Profile Page`,
+        userEmail: req.user.email,
+        response: resp,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.redirect('/');
     });
 };

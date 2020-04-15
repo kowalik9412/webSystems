@@ -19,12 +19,12 @@ const app = express();
 
 // Global Variables
 const PORT = process.env.PORT || 8080;
-// const MONGODB_URI = `${process.env.MONGODB}`;
-const MONGODB_URI = `${process.env.MONGODBLOCAL}`;
+const MONGODB_URI = `${process.env.MONGODB}`;
+// const MONGODB_URI = `${process.env.MONGODBLOCAL}`;
 const OPTIONS = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
 };
 
 // Middleware
@@ -36,7 +36,7 @@ app.use(
   session({
     secret: `${process.env.SESSIONSTRING}`,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 );
 app.use(passport.initialize());
@@ -57,11 +57,11 @@ app.use('/', indexRoutes);
 // Connect to DB
 mongoose
   .connect(MONGODB_URI, OPTIONS)
-  .then(result => {
+  .then((result) => {
     app.listen(PORT, () => {
       console.log(`\n\nServer running on PORT ${PORT}\n\n`);
     });
   })
-  .catch(error => {
+  .catch((error) => {
     console.log(error);
   });

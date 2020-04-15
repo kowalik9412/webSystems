@@ -192,7 +192,7 @@ input[type='text']:placeholder {
 
 .alert-danger {
   text-align: center;
-  margin-top: 50px;
+  margin: 50px auto;
   align-self: center;
   width: 50%;
   background-color: #b8142a;

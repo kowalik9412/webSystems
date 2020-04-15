@@ -11,9 +11,7 @@ router.get('/dashboard', isUserAuthenticated, userController.getDashboardPage);
 // POST Search
 router.post(
   '/search',
-  check('searchInput')
-    .notEmpty()
-    .withMessage('Please enter a name'),
+  check('searchInput').notEmpty().withMessage('Please enter a name'),
   isUserAuthenticated,
   userController.postSearch
 );
@@ -34,6 +32,13 @@ router.post(
 
 // Get Profile Page
 router.get('/profile', isUserAuthenticated, userController.getProfilePage);
+
+// Get Specific Profile
+router.get(
+  '/profile/:email',
+  isUserAuthenticated,
+  userController.getSpecificProfilePage
+);
 
 // Get Delete Saved/:id
 router.get('/delete/:id', isUserAuthenticated, userController.getDeleteSaved);

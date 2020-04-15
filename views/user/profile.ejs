@@ -28,8 +28,32 @@
         </ul>
         </nav>
         <section class="user-area">
+            <section class="profile-header">
+                <h2>Who else signed up?</h2>
+                <% if (typeof otherProfile != 'undefined' && otherProfile.length > 0) { %>
+                <div class="row">
+                    <% for (let otherProfiles of otherProfile){ %>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= otherProfiles %></h5>
+                                <a href="/user/profile/<%= otherProfiles %>" class="btn btn-outline-success">Visit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <% } if(typeof otherProfile == 'undefined' || otherProfile.length <= 0) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>No data!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <% } %>
+            </section>
             <section class="profile-body">
-                <h2>Things you saved..</h2>
+                <h2>What you want to watch</h2>
                 <% if (typeof response != 'undefined' && response.length > 0) { %>
                 <div class="row">
                     <% for (let responses of response){ %>
@@ -47,7 +71,7 @@
                     </div>
                     <% } %>
                 </div>
-                <% } if(typeof response == 'undefined') { %>
+                <% } if(typeof response == 'undefined' || response.length <= 0) { %>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>No data!</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -57,7 +81,7 @@
                 <% } %>
             </section>
             <section class="profile-footer">
-                <h2>Things others saved..</h2>
+                <h2>What others want to watch</h2>
                 <% if (typeof otherUser != 'undefined' && otherUser.length > 0) { %>
                 <div class="row">
                     <% for (let otherUsers of otherUser){ %>
@@ -74,7 +98,7 @@
                     </div>
                     <% } %>
                 </div>
-                <% } if(typeof otherUser == 'undefined') { %>
+                <% } if(typeof otherUser == 'undefined' || otherUser.length <= 0) { %>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>No data!</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
