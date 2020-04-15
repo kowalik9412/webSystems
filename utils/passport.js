@@ -4,14 +4,15 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 
-module.exports = function(passport) {
+// PassportJS local strategy
+module.exports = function (passport) {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       User.findOne({ email: email })
-        .then(user => {
+        .then((user) => {
           if (!user) {
             return done(null, false, {
-              message: 'This email does not exist in our database'
+              message: 'This email does not exist in our database',
             });
           }
 
@@ -20,13 +21,15 @@ module.exports = function(passport) {
               throw error;
             }
             if (isMatch) {
-              return done(null, user);
+              return done(null, user, {
+                message: 'You can now sign in',
+              });
             } else {
               return done(null, false, { message: 'Invalid credentials' });
             }
           });
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     })

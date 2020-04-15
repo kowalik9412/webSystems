@@ -2,76 +2,77 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+// User blueprint
 const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   saved: [
     {
       _id: false,
 
       title: {
-        type: String
+        type: String,
       },
       year: {
-        type: String
+        type: String,
       },
       released: {
-        type: String
+        type: String,
       },
       genre: {
-        type: String
+        type: String,
       },
       runtime: {
-        type: String
+        type: String,
       },
       director: {
-        type: String
+        type: String,
       },
       writer: {
-        type: String
+        type: String,
       },
       actors: {
-        type: String
+        type: String,
       },
       plot: {
-        type: String
+        type: String,
       },
       language: {
-        type: String
+        type: String,
       },
       country: {
-        type: String
+        type: String,
       },
       awards: {
-        type: String
+        type: String,
       },
       posterUrl: {
-        type: String
+        type: String,
       },
       rating: {
-        type: String
+        type: String,
       },
       vites: {
-        type: String
+        type: String,
       },
       imdbID: {
-        type: String
+        type: String,
       },
       type: {
-        type: String
+        type: String,
       },
       seasons: {
-        type: String
-      }
-    }
-  ]
+        type: String,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model('User', userSchema);

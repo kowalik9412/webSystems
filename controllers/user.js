@@ -2,14 +2,17 @@ const axios = require('axios');
 const { validationResult } = require('express-validator');
 const User = require('../models/user');
 
+// GET Dashboard
 exports.getDashboardPage = (req, res, next) => {
   res.render('user/dashboard', {
     title: 'Dashboard',
     response: [],
     userEmail: req.user.email,
+    specError: [],
   });
 };
 
+// POST Search
 exports.postSearch = (req, res, next) => {
   const errors = validationResult(req);
   const name = req.body.searchInput;
@@ -20,6 +23,7 @@ exports.postSearch = (req, res, next) => {
       response: [],
       errors: errors.array(),
       userEmail: req.user.email,
+      specError: [],
     });
   }
 
@@ -36,6 +40,7 @@ exports.postSearch = (req, res, next) => {
         title: 'Dashboard',
         response: resp,
         userEmail: req.user.email,
+        specError: [],
       });
     })
     .catch((error) => {
@@ -43,6 +48,7 @@ exports.postSearch = (req, res, next) => {
     });
 };
 
+// GET Target's details
 exports.getSearchDetails = (req, res, next) => {
   const imdbID = req.params.imdbID;
 
@@ -109,6 +115,7 @@ exports.getSearchDetails = (req, res, next) => {
     });
 };
 
+// POST Save target to profile
 exports.postSaveToProfile = (req, res, next) => {
   const imdbID = req.params.imdbID;
   const userId = req.user._id;
@@ -202,6 +209,7 @@ exports.postSaveToProfile = (req, res, next) => {
     });
 };
 
+// GET Profile Page
 exports.getProfilePage = (req, res, next) => {
   const userId = req.user._id;
   let resp = [];
@@ -254,6 +262,7 @@ exports.getProfilePage = (req, res, next) => {
     });
 };
 
+// GET Delete target by id
 exports.getDeleteSaved = (req, res, next) => {
   let data = [];
   const imdbIDtoRemoved = req.params.id;
@@ -281,6 +290,7 @@ exports.getDeleteSaved = (req, res, next) => {
     });
 };
 
+// Get target's page
 exports.getSpecificProfilePage = (req, res, next) => {
   const email = req.params.email;
   let resp = [];
