@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 
 exports.getIndexPage = (req, res, next) => {
   res.render('index', {
-    title: 'Sign In'
+    title: 'Sign In',
   });
 };
 
@@ -20,13 +20,13 @@ exports.postLogin = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.render('index', {
       title: 'Sign In - Error',
-      errors: errors.array()
+      errors: errors.array(),
     });
   } else {
     passport.authenticate('local', {
       successRedirect: '/user/dashboard',
       failureRedirect: '/',
-      failureFlash: true
+      failureFlash: true,
     })(req, res, next);
   }
 };
@@ -36,7 +36,7 @@ exports.getRegisterPage = (req, res, next) => {
 
   res.render('register', {
     title: 'Sign Up',
-    errors: errors.array()
+    errors: errors.array(),
   });
 };
 
@@ -51,40 +51,40 @@ exports.postRegister = (req, res, next) => {
     console.log(errors);
     return res.render('register', {
       title: 'Sign Up - Error',
-      errors: errors.array()
+      errors: errors.array(),
     });
   }
 
   User.findOne({ email: email })
-    .then(user => {
+    .then((user) => {
       if (user) {
         res.render('register', {
-          title: 'Sign Up - User Exists'
+          title: 'Sign Up - User Exists',
         });
       } else {
         bcrypt
           .hash(password, 10)
-          .then(hashedPassword => {
+          .then((hashedPassword) => {
             const user = new User({
               email: email,
-              password: hashedPassword
+              password: hashedPassword,
             });
             user.save();
           })
-          .then(result => {
+          .then((result) => {
             res.redirect('/');
           })
-          .catch(error => {
+          .catch((error) => {
             res.render('register', {
-              title: 'Sign Up - Something went wrong'
+              title: 'Sign Up - Something went wrong',
             });
             console.log(error);
           });
       }
     })
-    .catch(erorr => {
+    .catch((erorr) => {
       res.render('register', {
-        title: 'Sign Up - Something went wrong'
+        title: 'Sign Up - Something went wrong',
       });
       console.log(error);
     });

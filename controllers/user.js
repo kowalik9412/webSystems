@@ -294,6 +294,7 @@ exports.getSpecificProfilePage = (req, res, next) => {
       res.render('user/specprofile', {
         title: `${user.email} Profile Page`,
         userEmail: req.user.email,
+        otherEmail: user.email,
         response: resp,
       });
     })
