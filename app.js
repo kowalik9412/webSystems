@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
-const session = require('cookie-session');
+const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 require('./utils/passport')(passport);
