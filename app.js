@@ -39,6 +39,10 @@ app.use(
     secret: `${process.env.SESSIONSTRING}`,
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+    },
   })
 );
 app.use(passport.initialize());
