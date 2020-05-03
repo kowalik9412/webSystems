@@ -16,6 +16,7 @@ const userRoutes = require('./routes/user');
 const indexRoutes = require('./routes/index');
 
 const app = express();
+app.use(helmet());
 
 // Global Variables
 const PORT = process.env.PORT || 8080;
