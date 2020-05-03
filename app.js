@@ -9,6 +9,7 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const csrf = require('csurf');
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 require('./utils/passport')(passport);
 require('dotenv').config();
 
@@ -50,6 +51,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(csrfProtect);
+app.use(mongoSanitize());
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_message = req.flash('success_message');
