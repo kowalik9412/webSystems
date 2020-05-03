@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const session = require('cookie-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
+const helmet = require('helmet');
 require('./utils/passport')(passport);
 require('dotenv').config();
 
