@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const session = require('cookie-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
+const csrf = require('csurf');
 const helmet = require('helmet');
 require('./utils/passport')(passport);
 require('dotenv').config();
@@ -17,6 +18,7 @@ const userRoutes = require('./routes/user');
 const indexRoutes = require('./routes/index');
 
 const app = express();
+const csrfProtect = csrf();
 app.use(helmet());
 
 // Global Variables
@@ -47,11 +49,16 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(csrfProtect);
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_message = req.flash('success_message');
   res.locals.error_message = req.flash('error_message');
   res.locals.error = req.flash('error');
+  next();
+});
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
   next();
 });
 

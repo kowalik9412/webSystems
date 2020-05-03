@@ -13,6 +13,7 @@
                             <input type="email" id="login" name="email" placeholder="example@gmail.com" ">
                             <input type="password" id="password" name="password" placeholder="password">
                             <input type="password" id="password2" name="password2" placeholder="password">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <input type="submit" value="Sign Up">
             </form>
             <%- include('./includes/error.ejs') %>

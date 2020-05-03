@@ -33,6 +33,7 @@
                 <%- include('../includes/error.ejs') %>
                 <input type="text" id="searchInput" name="searchInput" placeholder="example: Harry Potter and the Deathly Hallows" ">
                 <input type="submit" class="btn" value="Search">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             </form>
             <% if (typeof response != 'undefined' && response.length > 0) { %>
             <section class="examples">

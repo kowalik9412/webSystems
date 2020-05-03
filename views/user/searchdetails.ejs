@@ -58,6 +58,7 @@
                         <form action="/user/save/<%= details.imdbID %>" method="post">
                             <button class="btn btn-lg btn-outline-success" type="submit">Save</button>
                             <a href="/" class="btn btn-lg btn-outline-danger">Back</a>
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         </form>
                     </section>
                 </div>
